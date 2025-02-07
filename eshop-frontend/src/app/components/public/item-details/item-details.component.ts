@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ItemService } from '../../../services/item.service';
 import { Item } from '../../../../../../shared/item';
+import { StoreService } from '../../../services/store.service';
 
 @Component({
   selector: 'app-item-details',
@@ -10,11 +11,13 @@ import { Item } from '../../../../../../shared/item';
   styleUrl: './item-details.component.css',
 })
 export class ItemDetailsComponent implements OnInit {
-  item?: Item;
+  item?: Item = { id: 0, name: '', price: 0, category: '', description: '' };
 
   constructor(
     private route: ActivatedRoute,
-    private itemService: ItemService
+    private itemService: ItemService,
+    private storeService: StoreService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -31,5 +34,11 @@ export class ItemDetailsComponent implements OnInit {
       this.item = undefined;
     }
   }
-  addToCart(): void {}
+
+  addToCart(): void {
+    if (this.item !== undefined) {
+      this.storeService.cart.addItem({ item: this.item, quantity: 1 });
+      this.router.navigate(['/cart']);
+    }
+  }
 }
