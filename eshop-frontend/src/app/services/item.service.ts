@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Item } from '../../../shared/item';
+import { Item } from '../../../../shared/item';
+import { ItemPayload } from '../../../../shared/itemPayload';
 
 const mock_items = [
   {
@@ -37,8 +38,12 @@ const mock_items = [
   providedIn: 'root',
 })
 export class ItemService {
-  getItems(): Observable<Item[]> {
-    return of(mock_items);
+  getItems(page: number, pageSize: number): Observable<ItemPayload> {
+    let payload: ItemPayload = {
+      items: mock_items.slice((page - 1) * pageSize, page * pageSize),
+      count: mock_items.length,
+    };
+    return of(payload);
   }
 
   getItem(id: number): Observable<Item> {
