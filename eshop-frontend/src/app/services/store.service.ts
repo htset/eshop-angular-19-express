@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { Item } from '../../../../shared/item';
+import { Filter } from '../../../../shared/filter';
 
 @Injectable({
   providedIn: 'root',
@@ -41,6 +42,20 @@ export class StoreService {
 
   set count(val: number) {
     this._count.next(val);
+  }
+
+  private readonly _filter = new BehaviorSubject<Filter>({
+    name: '',
+    categories: [],
+  });
+  readonly filter$ = this._filter.asObservable();
+
+  get filter(): Filter {
+    return this._filter.getValue();
+  }
+
+  set filter(val: Filter) {
+    this._filter.next(val);
   }
 
   constructor() {}

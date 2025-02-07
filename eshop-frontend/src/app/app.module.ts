@@ -7,9 +7,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ItemsComponent } from './components/public/items/items.component';
 import { ItemDetailsComponent } from './components/public/item-details/item-details.component';
 import { FormsModule } from '@angular/forms';
+import { FilterComponent } from './components/shared/filter/filter.component';
 
 @NgModule({
-  declarations: [AppComponent, ItemsComponent, ItemDetailsComponent],
+  declarations: [AppComponent, ItemsComponent, ItemDetailsComponent, FilterComponent],
   imports: [BrowserModule, AppRoutingModule, NgbModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
