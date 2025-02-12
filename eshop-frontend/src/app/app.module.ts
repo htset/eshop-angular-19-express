@@ -8,8 +8,12 @@ import { ItemDetailsComponent } from './components/public/item-details/item-deta
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FilterComponent } from './components/shared/filter/filter.component';
 import { CartComponent } from './components/public/cart/cart.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './components/public/login/login.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { JwtInterceptor } from './helpers/jwt.interceptor';
+import { AdminHomeComponent } from './components/admin/admin-home/admin-home.component';
+import { AdminUsersComponent } from './components/admin/admin-users/admin-users.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +23,8 @@ import { LoginComponent } from './components/public/login/login.component';
     FilterComponent,
     CartComponent,
     LoginComponent,
+    AdminHomeComponent,
+    AdminUsersComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,7 +34,14 @@ import { LoginComponent } from './components/public/login/login.component';
     HttpClientModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync(),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

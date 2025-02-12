@@ -3,7 +3,7 @@ import { AppDataSource } from "../config/data-source";
 import { UserEntity } from "../entities/userEntity";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { User } from "../../../shared/user";
+import { createDTO } from "../helpers/mappings";
 
 const JWT_SECRET = "our_jwt_secret";
 
@@ -47,7 +47,7 @@ export class AuthController {
       user.password = "";
 
       //Create and return a DTO (Data Transfer Object) of the user
-      res.json(AuthController.createDTO(user));
+      res.json(createDTO(user));
     } catch (err: unknown) {
       if (err instanceof Error) {
         res.status(500).json({ message: err.message });
@@ -55,19 +55,5 @@ export class AuthController {
         res.status(500).json({ message: "An unknown error occurred." });
       }
     }
-  }
-
-  //Create a Data Transfer Object (DTO) from the User Entity
-  private static createDTO(user: UserEntity): User {
-    return {
-      id: user.id,
-      username: user.username,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      role: user.role,
-      status: user.status,
-      token: user.token,
-    };
   }
 }
