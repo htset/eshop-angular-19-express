@@ -21,7 +21,7 @@ export function authenticateToken(
   //Verify the token
   jwt.verify(token, JWT_SECRET, (err, user) => {
     if (err) {
-      res.status(403).json({ message: "Invalid or expired token" });
+      res.status(401).json({ message: "Invalid or expired token" });
       return;
     }
 
