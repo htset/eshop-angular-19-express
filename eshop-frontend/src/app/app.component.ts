@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { StoreService } from './services/store.service';
 import { AuthenticationService } from './services/authentication.service';
 import { Router } from '@angular/router';
-import { User } from '../../../shared/user';
+import { User } from './../../../shared/user';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +23,8 @@ export class AppComponent {
 
   logout(e: Event) {
     e.preventDefault();
-    this.authenticationService.logout();
+    const currentUser = this.storeService.user;
+    this.authenticationService.logout(currentUser?.refreshToken || '');
     this.router.navigate(['/login']);
   }
 }

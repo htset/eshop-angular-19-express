@@ -4,8 +4,10 @@ export class User {
   password?: string;
   firstName?: string;
   lastName?: string;
-  token?: string;
+  status?: string;
+  token?: string | null;
+  refreshToken?: string | null;
+  refreshTokenExpiry?: Date | null;
   role?: string;
   email?: string;
-  status?: string;
 }

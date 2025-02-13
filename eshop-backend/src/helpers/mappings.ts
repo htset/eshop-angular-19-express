@@ -12,5 +12,7 @@ export function createDTO(user: UserEntity): User {
     role: user.role,
     status: user.status,
     token: user.token,
+    refreshToken: user.refreshToken,
+    refreshTokenExpiry: user.refreshTokenExpiry,
   };
 }

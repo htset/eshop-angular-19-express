@@ -15,6 +15,8 @@ router.get(
 );
 
 router.post("/auth/login", AuthController.login);
+router.post("/auth/refresh", AuthController.refreshToken);
+router.post("/auth/revoke", AuthController.revokeToken);
 router.get("/items", ItemController.getAllItems);
 router.get("/items/:id", ItemController.getItemById);
 router.get("/", ItemController.getAllItems);

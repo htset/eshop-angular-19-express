@@ -26,6 +26,12 @@ export class UserEntity {
   @Column()
   role!: string;
 
-  @Column({ nullable: true })
-  token!: string;
+  @Column({ type: "text", nullable: true })
+  token!: string | null;
+
+  @Column({ type: "text", nullable: true })
+  refreshToken!: string | null;
+
+  @Column({ type: "text", nullable: true })
+  refreshTokenExpiry!: Date | null;
 }
