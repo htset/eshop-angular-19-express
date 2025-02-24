@@ -6,6 +6,7 @@ import { authorizeAdmin } from "./middleware/authorization";
 import { UserController } from "./controllers/userController";
 import { AddressController } from "./controllers/addressController";
 import { OrderController } from "./controllers/orderController";
+import { LoggingController } from "./controllers/loggingController";
 
 const router = Router();
 
@@ -39,6 +40,7 @@ router.post("/auth/refresh", AuthController.refreshToken);
 router.post("/auth/revoke", AuthController.revokeToken);
 router.get("/items", ItemController.getAllItems);
 router.get("/items/:id", ItemController.getItemById);
+router.post("/remoteLogging", LoggingController.postLog);
 router.get("/", ItemController.getAllItems);
 
 export default router;

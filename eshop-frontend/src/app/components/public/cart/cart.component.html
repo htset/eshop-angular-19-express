@@ -8,7 +8,8 @@
     <th>Total Price</th>
     <th>&nbsp;</th>
   </tr>
-  <tr *ngFor="let item of storeService.cart.cartItems">
+  @for(item of storeService.cart.cartItems; track item){
+  <tr>
     <td>
       <a routerLink="/items/{{item.item.id}}">
         <img src="angular.svg" width="70px" />
@@ -25,7 +26,9 @@
       </a>
     </td>
     <td>
-      <input type="number" [(ngModel)]="item.quantity" size="2" id="quantity" />
+      <input type="number" [(ngModel)]="item.quantity" 
+      size="2" id="quantity" 
+      appAnalytics events="change blur" />
     </td>
     <td>
       <a routerLink="/items/{{item.item.id}}">
@@ -33,9 +36,12 @@
       </a>
     </td>
     <td>
-      <input type="button" (click)="removeFromCart(item)" id="remove" value="Remove" />
+      <input type="button" (click)="removeFromCart(item)" 
+      id="remove" value="Remove" 
+      appAnalytics events="click" />
     </td>
   </tr>
+  }
   <tr>
     <td colspan="4">&nbsp;</td>
     <td>{{storeService.cart.getTotalValue()}}</td>
@@ -44,8 +50,9 @@
 </table>
 <br />
 <br />
-<button (click)="emptyCart()" id="empty" [disabled]="storeService.cart.cartItems.length == 0">
-  Empty Cart
+<button (click)="emptyCart()" id="empty" 
+  [disabled]="storeService.cart.cartItems.length == 0" 
+  appAnalytics events="click">Empty Cart
 </button>
 <br />
 <br />

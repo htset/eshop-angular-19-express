@@ -5,6 +5,7 @@ import { AddressEntity } from "../entities/addressEntity";
 import { Order } from "../../../shared/order";
 import { OrderEntity } from "../entities/orderEntity";
 import { OrderDetailEntity } from "../entities/orderDetailEntity";
+import { LogEntity } from "../entities/logEntity";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -22,6 +23,7 @@ export const AppDataSource = new DataSource({
     AddressEntity,
     OrderEntity,
     OrderDetailEntity,
+    LogEntity,
   ],
   subscribers: [],
   migrations: [],
