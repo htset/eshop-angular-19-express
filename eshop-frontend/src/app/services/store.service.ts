@@ -4,6 +4,7 @@ import { Item } from '../../../../shared/item';
 import { Filter } from '../../../../shared/filter';
 import { Cart } from '../../../../shared/cart';
 import { User } from '../../../../shared/user';
+import { Order } from '../../../../shared/order';
 
 @Injectable({
   providedIn: 'root',
@@ -95,6 +96,17 @@ export class StoreService {
 
   set deliveryAddress(val: number) {
     this._deliveryAddress.next(val);
+  }
+
+  private readonly _order = new BehaviorSubject<Order>(new Order());
+  readonly order$ = this._order.asObservable();
+
+  get order(): Order {
+    return this._order.getValue();
+  }
+
+  set order(val: Order) {
+    this._order.next(val);
   }
 
   constructor() {}

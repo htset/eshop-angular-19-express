@@ -2,6 +2,9 @@ import { DataSource } from "typeorm";
 import { ItemEntity } from "../entities/itemEntity";
 import { UserEntity } from "../entities/userEntity";
 import { AddressEntity } from "../entities/addressEntity";
+import { Order } from "../../../shared/order";
+import { OrderEntity } from "../entities/orderEntity";
+import { OrderDetailEntity } from "../entities/orderDetailEntity";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -13,7 +16,13 @@ export const AppDataSource = new DataSource({
   schema: "eshop",
   synchronize: true,
   logging: true,
-  entities: [ItemEntity, UserEntity, AddressEntity],
+  entities: [
+    ItemEntity,
+    UserEntity,
+    AddressEntity,
+    OrderEntity,
+    OrderDetailEntity,
+  ],
   subscribers: [],
   migrations: [],
 });

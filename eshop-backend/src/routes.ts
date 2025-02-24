@@ -5,6 +5,7 @@ import { authenticateToken } from "./middleware/authentication";
 import { authorizeAdmin } from "./middleware/authorization";
 import { UserController } from "./controllers/userController";
 import { AddressController } from "./controllers/addressController";
+import { OrderController } from "./controllers/orderController";
 
 const router = Router();
 
@@ -29,6 +30,8 @@ router.delete(
   authenticateToken,
   AddressController.deleteAddress
 );
+
+router.post("/orders", authenticateToken, OrderController.saveOrder);
 
 //Non-protected routes
 router.post("/auth/login", AuthController.login);
